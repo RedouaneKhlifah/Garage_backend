@@ -17,7 +17,7 @@ class InsertAdminUser extends Migration
     {
         DB::table('users')->insert([
             'fullName' => 'Admin',
-            'email' => 'test@gmail.com',
+            'email' => 'redoinkhalifah@gmail.com',
             'password' =>bcrypt( "Password@123" ),
             'created_at' => now(),
             'updated_at' => now()

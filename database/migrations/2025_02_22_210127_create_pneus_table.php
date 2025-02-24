@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->enum('season', ['ete', 'hiver']);
             $table->integer('width');
             $table->integer('aspect_ratio');
-            $table->integer('diameter');
-            $table->string('indice_vitesse', 2);
+            $table->string('diameter');
+            $table->string('indice_vitesse');
             $table->integer('charge');
             $table->string('marque');
             $table->string('modele');

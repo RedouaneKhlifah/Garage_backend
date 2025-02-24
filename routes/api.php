@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FactureController;
 use App\Http\Controllers\PartenaireController;
@@ -51,5 +52,8 @@ Route::middleware(['api', 'SetLocale'])->group(function () {
 
         // car routes
         Route::apiResource('cars', CarController::class);
+
+        // Get all fournisseur
+        Route::apiResource('/fournisseurs', FournisseurController::class);
     });
 });

@@ -30,7 +30,7 @@ class CarRequest extends FormRequest
             'modele_id' => 'required|exists:modeles,id',
             'detail_modele_id' => 'required|exists:detail_modeles,id',
             'version' => 'nullable|string|max:50',
-            'engine' => 'required|string|max:100',
+            'energie' => 'required|string|max:100',
             'type_mines' => 'required|string|max:50',
             'genre' => 'required|string|max:50',
             'numero_chassis' => [
@@ -76,15 +76,15 @@ class CarRequest extends FormRequest
             'tires' => 'nullable|array|max:4',
             'tires.*.position' => 'required|string|in:avant,arriere',
             'tires.*.season' => 'required|string|in:ete,hiver',
-            'tires.*.width' => 'required|integer|min:100|max:400',
-            'tires.*.aspect_ratio' => 'required|integer|min:30|max:80',
-            'tires.*.diameter' => 'required|integer|min:10|max:24',
-            'tires.*.indice_vitesse' => 'required|string|size:1',
-            'tires.*.charge' => 'required|integer|min:50|max:150',
+            'tires.*.width' => 'required|integer|max:400',
+            'tires.*.aspect_ratio' => 'required|integer|max:80',
+            'tires.*.diameter' => 'required|string|max:20',
+            'tires.*.indice_vitesse' => 'required|string|max:20',
+            'tires.*.charge' => 'required|integer|max:150',
             'tires.*.marque' => 'required|string|max:100',
             'tires.*.modele' => 'required|string|max:100',
             'tires.*.runflat' => 'required|boolean',
-            'tires.*.renforce' => 'required|boolean',
+            'tires.*.renforce' => 'required|boolean', 
         ];
     }
 

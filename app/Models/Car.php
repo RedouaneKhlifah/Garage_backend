@@ -17,7 +17,7 @@ class Car extends Model
         'modele_id',
         'detail_modele_id',
         'version',
-        'engine',
+        'energie',
         'type_mines',
         'genre',
         'numero_chassis',
@@ -27,6 +27,7 @@ class Car extends Model
         'autre_information',
         'controle_technique',
         'certificat_assurance',
+        'company_assurance',
         'observations'
     ];
 
