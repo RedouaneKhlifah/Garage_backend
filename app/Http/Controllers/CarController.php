@@ -29,7 +29,6 @@ class CarController extends Controller
     public function store(CarRequest $request): JsonResponse
     {
         $car = $this->carService->createCar($request->validated());
-        broadcast(new ModelUpdated($car, 'car', 'created'));
         return response()->json($car, 201);
     }
 
@@ -42,14 +41,12 @@ class CarController extends Controller
     public function update(CarRequest $request, Car $car): JsonResponse
     {
         $car = $this->carService->updateCar($car, $request->validated());
-        broadcast(new ModelUpdated($car, 'car', 'updated'));
         return response()->json($car);
     }
 
     public function destroy(Car $car): JsonResponse
     {
         $this->carService->deleteCar($car);
-        broadcast(new ModelUpdated($car, 'car', 'deleted'));
         return response()->json(null, 204);
     }
 }

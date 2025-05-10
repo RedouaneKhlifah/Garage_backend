@@ -20,9 +20,9 @@ return new class extends Migration
             $table->decimal('sale_price', 8, 2); // Selling price (8 digits total, 2 decimal places)
             $table->decimal('cost_price', 8, 2)->nullable()->default(0); // Optional cost price
             $table->text('description')->nullable()->default(''); // Optional description
-            $table->decimal('tax', 8, 2)->nullable()->default(0); // Optional tax amount or percentage
+            // $table->decimal('tax', 8, 2)->nullable()->default(0); // Optional tax amount or percentage
             $table->decimal('stock', 8, 2)->default(0); // Current inventory quantity (default: 0)
-            $table->decimal('reorder_point', 8, 2)->default(0); // Reorder alert threshold (default: 0)
+            // $table->decimal('reorder_point', 8, 2)->default(0); // Reorder alert threshold (default: 0)
             $table->timestamps();
             $table->softDeletes(); // Created at and updated at timestamps
         });

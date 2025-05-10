@@ -30,7 +30,6 @@ class ProductController extends Controller
     public function store(ProductRequest $request): JsonResponse
     {
         $product = $this->productService->createProduct($request->validated() , $request->file('image'));
-        broadcast(new ModelUpdated($product, 'product', 'created'));
         return response()->json($product, 201);
     }
     
@@ -43,8 +42,6 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product): JsonResponse
     {
         $product = $this->productService->updateProduct($product, $request->validated(), $request->file('image'));
-        broadcast(new ModelUpdated($product, 'product', 'updated'));
-
         return $product
             ? response()->json($product)
             : response()->json(['message' => 'Product not found'], 404);
@@ -53,8 +50,6 @@ class ProductController extends Controller
     public function destroy(Product $product): JsonResponse
     {
         $success = $this->productService->deleteProduct($product);
-        broadcast(new ModelUpdated($product, 'product', 'deleted'));
-
         return response()->json(null, 204);
     }
 }

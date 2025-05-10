@@ -17,18 +17,18 @@ class Product extends Model
         'sale_price',
         'cost_price',
         'description',
-        'tax',
+        // 'tax',
         'stock',
-        'reorder_point',
+        // 'reorder_point',
     ];
 
     protected $casts = [
         'display_on_desktop' => 'boolean',
         'sale_price'         => 'decimal:2',
         'cost_price'         => 'decimal:2',
-        'tax'                => 'decimal:2',
+        // 'tax'                => 'decimal:2',
         'stock'              => 'decimal:2',
-        'reorder_point'      => 'decimal:2',
+        // 'reorder_point'      => 'decimal:2',
     ];
 
     protected $appends = ['image']; // Appending image attribute to model
