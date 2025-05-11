@@ -31,7 +31,6 @@ class ClientController extends Controller
     public function store(ClientRequest $request): JsonResponse
     {
         $client = $this->clientService->createClient($request->validated());
-        broadcast(new ModelUpdated($client, 'client', 'created'));
         return response()->json($client, 201);
     }
 
@@ -44,17 +43,14 @@ class ClientController extends Controller
     public function update(ClientRequest $request, Client $client): JsonResponse
     {
         $client = $this->clientService->updateClient($client, $request->validated());
-        broadcast(new ModelUpdated($client, 'client', 'updated'));
 
-        return $client
-            ? response()->json($client)
-            : response()->json(['message' => 'Client not found'], 404);
+        return response()->json($client);
+            
     }
 
     public function destroy(Client $client): JsonResponse
     {
         $success = $this->clientService->deleteClient($client);
-        broadcast(new ModelUpdated($client, 'client', 'deleted'));
 
         return response()->json(null, 204);
     }

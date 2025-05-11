@@ -12,48 +12,45 @@ use Illuminate\Http\Request;
 
 class FournisseurController extends Controller
 {
-    protected $clientService;
+    protected $fournisseurService;
 
-    public function __construct(FournisseurService $clientService)
+    public function __construct(FournisseurService $fournisseurService)
     {
-        $this->clientService = $clientService;
+        $this->fournisseurService = $fournisseurService;
     }
 
     public function index(Request $request): JsonResponse
     {
         $searchTerm = $request->query('search');
         $perPage = $request->query('per_page', 10);
-        $fournisseurs = $this->clientService->getAllFournisseurs($searchTerm, $perPage);
+        $fournisseurs = $this->fournisseurService->getAllFournisseurs($searchTerm, $perPage);
         return response()->json($fournisseurs);
     }
 
     public function store(FournisseurRequest $request): JsonResponse
     {
-        $client = $this->clientService->createFournisseur($request->validated());
-        broadcast(new ModelUpdated($client, 'client', 'created'));
-        return response()->json($client, 201);
+        $fournisseur = $this->fournisseurService->createFournisseur($request->validated());
+        return response()->json($fournisseur, 201);
     }
 
-    public function show(Fournisseur $client): JsonResponse
+    public function show(Fournisseur $fournisseur): JsonResponse
     {
-        $client = $this->clientService->getFournisseur($client);
-        return response()->json($client);
+        $fournisseur = $this->fournisseurService->getFournisseur($fournisseur);
+        return response()->json($fournisseur);
     }
 
-    public function update(FournisseurRequest $request, Fournisseur $client): JsonResponse
+    public function update(FournisseurRequest $request, Fournisseur $fournisseur): JsonResponse
     {
-        $client = $this->clientService->updateFournisseur($client, $request->validated());
-        broadcast(new ModelUpdated($client, 'client', 'updated'));
+        $fournisseur = $this->fournisseurService->updateFournisseur($fournisseur, $request->validated());
 
-        return $client
-            ? response()->json($client)
+        return $fournisseur
+            ? response()->json($fournisseur)
             : response()->json(['message' => 'Fournisseur not found'], 404);
     }
 
-    public function destroy(Fournisseur $client): JsonResponse
+    public function destroy(Fournisseur $fournisseur): JsonResponse
     {
-        $success = $this->clientService->deleteFournisseur($client);
-        broadcast(new ModelUpdated($client, 'client', 'deleted'));
+        $success = $this->fournisseurService->deleteFournisseur($fournisseur);
 
         return response()->json(null, 204);
     }
