@@ -13,34 +13,39 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('clients', function (Blueprint $table) {
-            $table->id(); // Auto-incrementing primary key
-            $table->string('first_name'); // First name of the client
-            $table->string('last_name'); // Last name of the client
-            $table->string('email')->unique(); // Unique email address
-            $table->string('phone'); // Phone number
-            $table->string('country'); // Country
-            $table->string('city'); // City
-            $table->string('address'); // Address
+            $table->id();
+
+            $table->enum('civility', ['Madame', 'Mademoiselle', 'Monsieur', 'Société', 'Aucune'])
+                  ->comment('Civilité: required - Madame, Mademoiselle, Monsieur, Société, Aucune');
+            $table->string('company')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('first_name')->nullable();
+
+            $table->string('address')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+
+            $table->string('email')->unique()->nullable();
+            $table->string('website')->nullable();
+
+            $table->string('main_phone')->nullable();
+            $table->string('secondary_phone')->nullable();
+            $table->string('fax')->nullable();
+            $table->string('mobile')->nullable();
+
+            $table->string('vat_number')->nullable()->comment('TVA Intra.');
+            $table->text('observation')->nullable();
+
             $table->timestamps();
-            $table->softDeletes(); // Created at and updated at timestamps
+            $table->softDeletes();
         });
     }
 
-
     public function down(): void
     {
-        // Disable foreign key checks
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        
-        // Optionally, if you need to drop a check constraint and your MySQL version supports it,
-        // use the DROP CHECK syntax. (Otherwise, you may omit this if the table is being dropped.)
-        // DB::statement('ALTER TABLE tickets DROP CHECK client_id_required_for_exit');
-        
-        Schema::dropIfExists('clients'); // Drop the table if the migration is rolled back
-
-        
-        // Re-enable foreign key checks
+        Schema::dropIfExists('clients');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
-    
 };

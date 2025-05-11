@@ -8,20 +8,20 @@ class CreateEmployeesTable extends Migration
 {
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
-            $table->id();
-            $table->string('employee_id');
-            $table->string('last_name');
-            $table->string('first_name');
-            $table->string('national_id')->unique();
-            $table->string('address');
-            $table->string('city');
-            $table->date('date_of_engagement');
-            $table->decimal('monthly_salary', 10, 2);
-            $table->decimal('price_per_hour', 8, 2);
-            $table->decimal('price_per_day', 8, 2);
-            $table->timestamps();
-        });
+        // Schema::create('employees', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('employee_id');
+        //     $table->string('last_name');
+        //     $table->string('first_name');
+        //     $table->string('national_id')->unique();
+        //     $table->string('address');
+        //     $table->string('city');
+        //     $table->date('date_of_engagement');
+        //     $table->decimal('monthly_salary', 10, 2);
+        //     $table->decimal('price_per_hour', 8, 2);
+        //     $table->decimal('price_per_day', 8, 2);
+        //     $table->timestamps();
+        // });
     }
 
     public function down()

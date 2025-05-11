@@ -8,31 +8,40 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Client extends Model
 {
-    use HasFactory , SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    // Specify the fields that can be mass-assigned
     protected $fillable = [
-        'first_name',
+        'civility',
+        'company',
         'last_name',
-        'email',
-        'phone',
-        'country',
-        'city',
+        'first_name',
         'address',
+        'postal_code',
+        'city',
+        'country',
+        'email',
+        'website',
+        'main_phone',
+        'secondary_phone',
+        'fax',
+        'mobile',
+        'vat_number',
+        'observation',
     ];
 
-    // Ensure full_name is always included when retrieving the model
     protected $appends = ['full_name'];
 
-    // Accessor to get full name
     public function getFullNameAttribute()
     {
-        return "{$this->first_name} {$this->last_name}";
+        if (in_array($this->civility, ['Madame', 'Mademoiselle', 'Monsieur'])) {
+            return "{$this->first_name} {$this->last_name}";
+        } elseif ($this->civility === 'Société') {
+            return $this->company;
+        } else {
+            return 'Client';
+        }
     }
 
-    /**
-     * Get the tickets associated with the client.
-     */
     public function tickets()
     {
         return $this->hasMany(Ticket::class, 'client_id');
