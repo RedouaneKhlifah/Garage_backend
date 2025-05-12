@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('fax')->nullable();
             $table->string('mobile')->nullable();
 
-            $table->integer('payment_method')->nullable()->comment('TVA Intra.');
+            $table->integer('payment_method')->nullable()->comment('Moyen de paiement');
             $table->integer('ice')->nullable()->comment('ICE: Identifiant Commun de l’Entreprise');
 
 

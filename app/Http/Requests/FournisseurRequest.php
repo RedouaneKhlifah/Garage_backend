@@ -7,34 +7,48 @@ use Illuminate\Validation\Rule;
 
 class FournisseurRequest extends FormRequest
 {
-    public function authorize()
+ public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
-        $fournisseurId = $this->route('fournisseur');
-        
+       $clientId = $this->route('client');
+
+        $civilityValues = ['Madame', 'Mademoiselle', 'Monsieur', 'Société', 'Aucune'];
+
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
+            'civility' => ['required', Rule::in($civilityValues)],
+            'company' => ['required_if:civility,Société', 'nullable', 'string', 'max:255'],
+            'first_name' => ['required_unless:civility,Société', 'nullable', 'string', 'max:255'],
+            'last_name' => ['required_unless:civility,Société', 'nullable', 'string', 'max:255'],
+            'address' => ['nullable', 'string'],
+            'postal_code' => ['nullable', 'string'],
+            'city' => ['nullable', 'string'],
+            'country' => ['nullable', 'string'],
             'email' => [
-                'required',
+                'nullable',
                 'email',
-                Rule::unique('fournisseurs', 'email')->ignore($fournisseurId)
-            ],
-            'phone' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+                Rule::unique('clients', 'email')->ignore($clientId)
+            ],            
+            'website' => ['nullable', 'string'],
+            'main_phone' => ['nullable', 'string'],
+            'secondary_phone' => ['nullable', 'string'],
+            'fax' => ['nullable', 'string'],
+            'payment_method' => ['nullable', 'string'],
+            'ice' => ['nullable', 'numeric'],
+            'observation' => ['nullable', 'string'],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
-            'email.unique' => trans("fournisseur.validation.email_already_exists"),
+            'company.required_if' => 'The company field is required when civility is Société.',
+            'first_name.required_unless' => 'The first name is required unless civility is Société.',
+            'last_name.required_unless' => 'The last name is required unless civility is Société.',
+            'email.unique' => trans("client.validation.email_already_exists"),
         ];
     }
 }
