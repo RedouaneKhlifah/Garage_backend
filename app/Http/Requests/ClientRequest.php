@@ -36,8 +36,8 @@ class ClientRequest extends FormRequest
             'main_phone' => ['nullable', 'string'],
             'secondary_phone' => ['nullable', 'string'],
             'fax' => ['nullable', 'string'],
-            'mobile' => ['nullable', 'string'],
-            'vat_number' => ['nullable', 'string'],
+            'vat_number' => ['nullable', 'numeric'],
+            'ice' => ['nullable', 'numeric'],
             'observation' => ['nullable', 'string'],
         ];
     }

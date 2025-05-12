@@ -32,9 +32,11 @@ return new class extends Migration
             $table->string('main_phone')->nullable();
             $table->string('secondary_phone')->nullable();
             $table->string('fax')->nullable();
-            $table->string('mobile')->nullable();
 
-            $table->string('vat_number')->nullable()->comment('TVA Intra.');
+            $table->integer('vat_number')->nullable()->comment('TVA Intra.');
+            $table->integer('ice')->nullable()->comment('ICE: Identifiant Commun de l’Entreprise');
+
+
             $table->text('observation')->nullable();
 
             $table->timestamps();

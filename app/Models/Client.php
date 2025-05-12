@@ -27,6 +27,7 @@ class Client extends Model
         'mobile',
         'vat_number',
         'observation',
+        'ice'
     ];
 
     protected $appends = ['full_name'];
@@ -42,8 +43,4 @@ class Client extends Model
         }
     }
 
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class, 'client_id');
-    }
 }
