@@ -33,8 +33,9 @@ return new class extends Migration
             $table->string('secondary_phone')->nullable();
             $table->string('fax')->nullable();
 
-            $table->integer('vat_number')->nullable()->comment('TVA Intra.');
-            $table->integer('ice')->nullable()->comment('ICE: Identifiant Commun de l’Entreprise');
+            $table->string('vat_number', )->nullable()->comment('TVA Intra.');
+            $table->string('ice', )->nullable()->comment('ICE: Identifiant Commun de l’Entreprise');
+
 
 
             $table->text('observation')->nullable();

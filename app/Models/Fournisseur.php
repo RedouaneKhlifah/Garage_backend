@@ -26,6 +26,7 @@ class Fournisseur extends Model
         'secondary_phone',
         'fax',
         'mobile',
+        'ice',
         'payment_method',
         'observation',
     ];
